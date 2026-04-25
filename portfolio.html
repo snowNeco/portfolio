@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#1f2540">
+
+  <title>Office yuco. ／ 業務改善・自動化・Web分析｜石橋夕紀子</title>
+  <meta name="description" content="「AIをどう業務に活かせばいいか分からない」を実装レベルまで落とし込みます。GA4・GTM・GAS・各種APIを駆使した業務自動化、事業分析ダッシュボード、AIツール開発まで一貫対応。北九州拠点／オンラインで全国対応。">
+  <meta name="author" content="石橋夕紀子">
+
+  <!-- ▼ デプロイ先URLが確定したらドメイン部分（snowneco.github.io/portfolio）を差し替えてください -->
+  <link rel="canonical" href="https://snowneco.github.io/portfolio/">
+
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Office yuco.">
+  <meta property="og:title" content="Office yuco. ／ 業務改善・自動化・Web分析">
+  <meta property="og:description" content="「AIをどう業務に活かせばいいか分からない」を実装レベルまで落とし込みます。GA4・GAS・APIを駆使した業務自動化と事業分析ダッシュボード構築。">
+  <meta property="og:url" content="https://snowneco.github.io/portfolio/">
+  <meta property="og:image" content="https://snowneco.github.io/portfolio/img/fv-img.png">
+  <meta property="og:locale" content="ja_JP">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Office yuco. ／ 業務改善・自動化・Web分析">
+  <meta name="twitter:description" content="「AIをどう業務に活かせばいいか分からない」を実装レベルまで落とし込みます。">
+  <meta name="twitter:image" content="https://snowneco.github.io/portfolio/img/fv-img.png">
+
+  <!-- Favicon / Apple Touch Icon（顔アイコン） -->
+  <link rel="icon" type="image/png" href="img/face-icon.png">
+  <link rel="apple-touch-icon" href="img/face-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* === FV画像から抽出した「和の伝統色」パレット === */
+    :root {
+      --shu:        #b94a4a;   /* 朱赤  メインアクセント */
+      --shu-deep:   #9c3a3a;   /* 朱赤・濃 */
+      --kon:        #1f2540;   /* 紺青  最も濃いダーク */
+      --kon-soft:   #2d3656;
+      --yamabuki:   #c9a14a;   /* 山吹  ゴールドアクセント */
+      --yamabuki-l: #d9b86a;
+      --fukamidori: #3a6b5c;   /* 深緑  サブアクセント */
+      --sakura:     #e8a5a5;   /* 桜色  淡い差し色 */
+      --gofun:      #faf6ed;   /* 胡粉  紙の白 */
+      --gofun-2:    #f3ede0;   /* 一段濃い和紙色 */
+      --sumi:       #2a2620;   /* 墨   テキスト */
+      --sumi-mid:   #6a6258;   /* 薄墨 */
+      --line:       #e6dfcf;   /* 罫線 */
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+      color: var(--sumi);
+      background: var(--gofun);
+      line-height: 1.85;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 和紙テクスチャ風のうっすら背景 */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(201,161,74,0.04), transparent 40%),
+        radial-gradient(circle at 80% 90%, rgba(185,74,74,0.04), transparent 40%);
+      z-index: 0;
+    }
+
+    /* ===== ヒーロー ===== */
+    .hero {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: var(--gofun-2);
+    }
+    .hero img.fv {
+      width: 100%;
+      height: auto;
+      max-height: 60vh;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .hero-text {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(250,246,237,0.96) 30%, rgba(250,246,237,0.6) 70%, transparent);
+      padding: 60px 24px 28px;
+      text-align: center;
+    }
+    .hero-text .lead {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(13px, 2vw, 15px);
+      color: var(--shu);
+      letter-spacing: 0.18em;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .hero-text h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(20px, 4.6vw, 32px);
+      font-weight: 700;
+      color: var(--kon);
+      line-height: 1.5;
+      letter-spacing: 0.04em;
+    }
+    .hero-text h1 .accent {
+      color: var(--shu);
+      position: relative;
+    }
+    .hero-text h1 .accent::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: -2px;
+      height: 6px;
+      background: var(--yamabuki);
+      opacity: 0.35;
+      z-index: -1;
+    }
+
+    /* ===== プロフィール帯 ===== */
+    .profile-bar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 26px 22px;
+      background: linear-gradient(135deg, #fff 0%, var(--gofun) 100%);
+      border-bottom: 1px solid var(--line);
+      z-index: 1;
+    }
+    .profile-bar::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg,
+        var(--shu) 0%, var(--shu) 18%,
+        var(--yamabuki) 18%, var(--yamabuki) 36%,
+        var(--fukamidori) 36%, var(--fukamidori) 54%,
+        var(--kon) 54%, var(--kon) 72%,
+        var(--sakura) 72%, var(--sakura) 100%);
+    }
+    .profile-bar img.icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 1px var(--yamabuki), 0 4px 12px rgba(31,37,64,0.08);
+      flex-shrink: 0;
+    }
+    .profile-bar .name {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--kon);
+      letter-spacing: 0.05em;
+    }
+    .profile-bar .sub {
+      font-size: 12px;
+      color: var(--sumi-mid);
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+    }
+    .profile-bar .tagline {
+      font-size: 13px;
+      color: var(--fukamidori);
+      margin-top: 8px;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    /* ===== コンテンツ共通 ===== */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      padding: 64px 0 56px;
+      position: relative;
+    }
+
+    /* セクション背景バリエーション（メリハリ） */
+    .sec-paper { background: var(--gofun); }
+    .sec-warm  {
+      background: var(--gofun-2);
+      background-image:
+        radial-gradient(circle at 12% 0%,  rgba(201,161,74,0.10), transparent 32%),
+        radial-gradient(circle at 88% 100%, rgba(185, 74,74,0.06), transparent 36%);
+    }
+    /* 区切りに細い金線（セクション間の和の余韻） */
+    .sec-paper + .sec-warm::before,
+    .sec-warm  + .sec-paper::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 80px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--yamabuki), transparent);
+      opacity: 0.6;
+    }
+
+    .section-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--shu);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+    }
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(20px, 3.2vw, 24px);
+      font-weight: 700;
+      color: var(--kon);
+      margin-bottom: 28px;
+      letter-spacing: 0.06em;
+      line-height: 1.5;
+    }
+    h2::after {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 2px;
+      background: var(--shu);
+      margin-top: 10px;
+    }
+
+    h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--fukamidori);
+      margin: 18px 0 6px;
+      letter-spacing: 0.04em;
+    }
+
+    p { margin-bottom: 10px; color: var(--sumi-mid); }
+
+    /* ===== お悩みリスト ===== */
+    .worry-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .worry-list li {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      border-radius: 4px;
+      padding: 14px 16px 14px 44px;
+      position: relative;
+      color: var(--sumi);
+      font-size: 14px;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .worry-list li:hover {
+      transform: translateX(2px);
+      box-shadow: 0 4px 14px rgba(31,37,64,0.06);
+    }
+    .worry-list li::before {
+      content: '？';
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 22px; height: 22px;
+      background: var(--shu);
+      color: #fff;
+      border-radius: 50%;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ===== 強みリード文 ===== */
+    .lead-strength {
+      position: relative;
+      background: linear-gradient(135deg, var(--kon) 0%, var(--kon-soft) 100%);
+      color: #fff;
+      padding: 24px 26px 26px;
+      border-radius: 8px;
+      margin-bottom: 26px;
+      font-size: 15px;
+      line-height: 1.85;
+      overflow: hidden;
+    }
+    .lead-strength::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 140px; height: 140px;
+      background: radial-gradient(circle, rgba(201,161,74,0.25), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .lead-strength .lead-mark {
+      display: inline-block;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 12px;
+      color: var(--yamabuki-l);
+      letter-spacing: 0.25em;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .lead-strength .lead-main {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(16px, 3.4vw, 19px);
+      font-weight: 700;
+      line-height: 1.65;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+      position: relative;
+      color: var(--gofun);  /* グローバルpの色を上書きして可読性確保 */
+    }
+    .lead-strength .lead-main em {
+      font-style: normal;
+      color: var(--yamabuki-l);
+      border-bottom: 1px solid var(--yamabuki);
+      padding-bottom: 2px;
+    }
+    .lead-strength .lead-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.78);
+      margin: 0;
+      position: relative;
+      line-height: 1.8;
+    }
+
+    /* ===== サービスカード ===== */
+    .service-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .service-card {
+      position: relative;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 22px 20px 20px;
+      overflow: hidden;
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+    .service-card--feature {
+      border-color: var(--yamabuki-l);
+      background:
+        linear-gradient(135deg, #fff 0%, #fef9ea 100%);
+      box-shadow: 0 4px 16px rgba(201,161,74,0.12);
+    }
+    .service-card--feature::before {
+      transform: scaleY(1) !important;
+      background: var(--shu) !important;
+    }
+    .service-card--feature .label {
+      color: var(--shu-deep);
+      border-color: var(--shu-deep);
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: var(--yamabuki);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform .3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(31,37,64,0.08);
+      border-color: var(--yamabuki-l);
+    }
+    .service-card:hover::before { transform: scaleY(1); }
+
+    .service-card .label {
+      display: inline-block;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--shu);
+      border-bottom: 1px solid var(--shu);
+      padding-bottom: 2px;
+      margin-bottom: 12px;
+      letter-spacing: 0.18em;
+    }
+    .service-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: var(--kon);
+    }
+    .service-card p {
+      font-size: 13px;
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    /* ===== プロダクト ===== */
+    .product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .product-item {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: border-color .25s ease;
+    }
+    .product-item[open] { border-color: var(--yamabuki-l); }
+    .product-item summary {
+      padding: 16px 18px;
+      cursor: pointer;
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      font-size: 14.5px;
+      color: var(--kon);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: 0.04em;
+      transition: background .2s ease;
+    }
+    .product-item summary:hover { background: var(--gofun-2); }
+    .product-item summary::-webkit-details-marker { display: none; }
+    .product-item summary::after {
+      content: '';
+      margin-left: auto;
+      width: 12px; height: 12px;
+      border-right: 2px solid var(--shu);
+      border-bottom: 2px solid var(--shu);
+      transform: rotate(45deg);
+      transition: transform .3s ease;
+      flex-shrink: 0;
+    }
+    .product-item[open] summary::after { transform: rotate(-135deg); }
+
+    .product-body {
+      padding: 4px 18px 18px;
+      animation: fadeIn .3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .product-row {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--line);
+      font-size: 13px;
+    }
+    .product-row:last-child { border-bottom: none; }
+    .product-row .key {
+      width: 48px;
+      flex-shrink: 0;
+      color: var(--sumi-mid);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      padding-top: 3px;
+    }
+    .product-row .val { color: var(--sumi); flex: 1; }
+    .product-row.result .val {
+      color: var(--shu-deep);
+      font-weight: 700;
+    }
+
+    /* ===== 実績数字 ===== */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .stat-box {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 22px 12px 18px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-box::before {
+      content: '';
+      position: absolute;
+      top: 8px; right: 8px;
+      width: 24px; height: 24px;
+      border: 1px solid var(--yamabuki);
+      border-radius: 50%;
+      opacity: 0.4;
+    }
+    .stat-box .num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(26px, 5vw, 32px);
+      font-weight: 900;
+      color: var(--shu);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+    .stat-box .desc {
+      font-size: 11.5px;
+      color: var(--sumi-mid);
+      margin-top: 8px;
+      line-height: 1.55;
+    }
+
+    /* ===== 経歴テーブル ===== */
+    .career-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .career-table tr:not(:last-child) td {
+      border-bottom: 1px solid var(--line);
+    }
+    .career-table td {
+      padding: 12px 14px;
+      color: var(--sumi);
+      vertical-align: top;
+    }
+    .career-table td:first-child {
+      white-space: nowrap;
+      color: var(--yamabuki);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      width: 130px;
+      background: var(--gofun-2);
+    }
+
+    /* ===== 対応業種 ===== */
+    .block-heading {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--kon);
+      margin: 0 0 14px;
+      padding-left: 12px;
+      border-left: 3px solid var(--yamabuki);
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+    }
+
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .industry-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      border-radius: 4px;
+      padding: 14px 16px;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .industry-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(31,37,64,0.06);
+    }
+    .industry-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 24px;
+      color: var(--yamabuki);
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .industry-jp {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--kon);
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+    }
+    .industry-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 11px;
+      color: var(--sumi-mid);
+      letter-spacing: 0.18em;
+      margin-top: 2px;
+    }
+
+    /* ===== ツールスタック ===== */
+    .tool-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 22px 22px 24px;
+    }
+    .tool-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .tool-cat {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 12.5px;
+      color: var(--shu);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .tool-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      background: var(--gofun);
+      border: 1px solid var(--line);
+      color: var(--kon);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: background .2s ease, border-color .2s ease;
+    }
+    .tag:hover {
+      background: #fff;
+      border-color: var(--yamabuki-l);
+    }
+    .tag--ai {
+      background: linear-gradient(135deg, #fff8ea, #fcecc8);
+      border-color: var(--yamabuki-l);
+      color: var(--shu-deep);
+      font-weight: 700;
+    }
+    .tag--ai::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--yamabuki);
+      border-radius: 50%;
+      margin-right: 7px;
+    }
+
+    @media (min-width: 600px) {
+      .industry-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 900px) {
+      .industry-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+
+    /* ===== 料金・対応 ===== */
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .info-row {
+      display: flex;
+      gap: 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px 18px;
+      font-size: 14px;
+      align-items: flex-start;
+    }
+    .info-row .key {
+      width: 96px;
+      flex-shrink: 0;
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      color: var(--kon);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      position: relative;
+      padding-left: 12px;
+    }
+    .info-row .key::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px;
+      width: 4px; height: 4px;
+      background: var(--shu);
+      border-radius: 50%;
+    }
+    .info-row .val { color: var(--sumi-mid); flex: 1; }
+
+    /* ===== CTAセクション ===== */
+    .cta-section {
+      position: relative;
+      background: linear-gradient(135deg, var(--kon) 0%, var(--kon-soft) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 60px 24px 56px;
+      margin-top: 32px;
+      overflow: hidden;
+    }
+    .cta-section::before,
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .cta-section::before {
+      top: -60px; left: -40px;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(185,74,74,0.18), transparent 70%);
+    }
+    .cta-section::after {
+      bottom: -80px; right: -40px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(201,161,74,0.15), transparent 70%);
+    }
+    .cta-section .cta-inner { position: relative; z-index: 1; }
+    .cta-section .section-label { color: var(--yamabuki-l); }
+    .cta-section h2 {
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .cta-section h2::after { background: var(--yamabuki); margin-left: auto; margin-right: auto; }
+    .cta-section p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 28px;
+      line-height: 1.85;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--shu);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 16px 40px;
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+      box-shadow: 0 6px 20px rgba(185,74,74,0.4);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .btn:hover {
+      background: var(--shu-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(185,74,74,0.5);
+    }
+    .btn::after {
+      content: '→';
+      font-size: 16px;
+      transition: transform .25s ease;
+    }
+    .btn:hover::after { transform: translateX(4px); }
+
+    /* ===== フッター ===== */
+    footer {
+      background: var(--sumi);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 24px 16px;
+      font-size: 12px;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 0.15em;
+    }
+
+    /* ===== タブレット ===== */
+    @media (min-width: 600px) {
+      body { font-size: 16px; }
+      .stats { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+      .service-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .profile-bar { padding: 32px 36px; }
+      .container { padding: 0 28px; }
+      section { padding: 80px 0 64px; }
+      .hero img.fv { max-height: 70vh; }
+      .hero-text { padding: 80px 32px 36px; }
+    }
+
+    /* ===== PC ===== */
+    @media (min-width: 900px) {
+      body { font-size: 16.5px; }
+      .container { max-width: 1040px; padding: 0 36px; }
+      .service-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+
+      /* 幅が広いと1カラムだと間延びするので、テキスト中心の縦リストを2カラム化 */
+      .worry-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+      /* 1カラムのテキストブロックは可読幅にキャップ（中央寄せ） */
+      /* lead-strengthは下のサービスカード列と幅を揃えるためキャップ無し */
+      .career-table  { max-width: 880px; margin: 0 auto; }
+      .info-list     { max-width: 820px; margin: 0 auto; }
+
+      /* 文字を一段大きく */
+      .service-card h3 { font-size: 17px; }
+      .service-card p  { font-size: 14.5px; }
+      .worry-list li   { font-size: 15px; }
+      .info-row        { font-size: 15px; }
+      .product-row     { font-size: 14px; }
+
+      .hero img.fv { max-height: 560px; }
+    }
+
+    /* ===== ワイドPC（〜1400px想定） ===== */
+    @media (min-width: 1280px) {
+      body { font-size: 17px; }
+      .container { max-width: 1300px; padding: 0 56px; }
+      .hero img.fv { max-height: 620px; }
+      section { padding: 100px 0 84px; }
+
+      h2 { font-size: 26px; }
+      .lead-strength .lead-main { font-size: 21px; }
+      .stat-box .num { font-size: 36px; }
+    }
+
+    /* ===== 和雲アニメーション ===== */
+    .cloud-zone {
+      position: relative;
+      overflow: hidden;
+    }
+    .cloud-zone > .container {
+      position: relative;
+      z-index: 2;
+    }
+    .cloud-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .cloud {
+      position: absolute;
+      bottom: -200px;
+      width: 180px;
+      height: auto;
+      opacity: 0;
+      will-change: transform, opacity;
+      animation: rise-cloud var(--dur, 32s) linear infinite,
+                 sway-cloud calc(var(--dur, 32s) / 3) ease-in-out infinite alternate;
+      animation-delay: var(--delay, 0s), 0s;
+    }
+    /* マイナスdelayで「すでに動いている状態」から始める（ページ表示時に複数の雲が散らばっている） */
+    .cloud--shu      { left: 6%;  width: 200px; --dur: 32s; --delay: -2s;  }
+    .cloud--kon      { left: 28%; width: 240px; --dur: 40s; --delay: -16s; }
+    .cloud--yamabuki { left: 50%; width: 170px; --dur: 28s; --delay: -8s;  }
+    .cloud--midori   { left: 70%; width: 210px; --dur: 36s; --delay: -22s; }
+    .cloud--sakura   { left: 18%; width: 150px; --dur: 38s; --delay: -10s; }
+    .cloud--kon2     { left: 82%; width: 160px; --dur: 30s; --delay: -4s;  }
+
+    @keyframes rise-cloud {
+      0%   { transform: translateY(0)      scale(0.95); opacity: 0; }
+      12%  { opacity: 0.32; }
+      50%  { transform: translateY(-50vh)  scale(1.02); opacity: 0.30; }
+      88%  { opacity: 0.20; }
+      100% { transform: translateY(-110vh) scale(1.08); opacity: 0; }
+    }
+    @keyframes sway-cloud {
+      0%   { margin-left: -12px; }
+      100% { margin-left:  12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cloud { animation: none; opacity: 0.18; bottom: 30%; }
+    }
+
+    /* スクロール時フェードイン */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヒーロー -->
+  <div class="hero">
+    <img class="fv" src="img/fv-img.png" alt="Office yuco.">
+    <div class="hero-text">
+      <span class="lead">Office yuco. Portfolio</span>
+      <h1>業務の<span class="accent">「困った」</span>を、<br>仕組みで解決します</h1>
+    </div>
+  </div>
+
+  <!-- プロフィール帯 -->
+  <div class="profile-bar">
+    <img class="icon" src="img/face-icon.png" alt="石橋夕紀子">
+    <div>
+      <div class="name">Office yuco. ／ 石橋夕紀子</div>
+      <div class="sub">北九州拠点 ／ オンラインで全国対応</div>
+      <div class="tagline">SE歴10年・Webディレクション6年<br>「現場の困った」を技術で解決します</div>
+    </div>
+  </div>
+
+  <!-- お悩み -->
+  <section class="reveal sec-paper">
+    <div class="container">
+      <span class="section-label">Your Concerns</span>
+      <h2>こんなお悩み、ありませんか？</h2>
+      <ul class="worry-list">
+        <li>GA4やGTMを入れたけど、何を見ればいいかわからない</li>
+        <li>サイトはあるのに、問い合わせがなかなか来ない</li>
+        <li>毎月おなじ集計・報告作業に時間を取られている</li>
+        <li>ツールを入れたはいいけど、誰も使いこなせていない</li>
+        <li>業務が属人化していて、引き継ぎができない</li>
+        <li>データはあるのに、経営判断に使えていない</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- サービス -->
+  <section class="reveal sec-warm">
+    <div class="container">
+      <span class="section-label">Services</span>
+      <h2>できること</h2>
+
+      <div class="lead-strength">
+        <span class="lead-mark">/ My Strength /</span>
+        <p class="lead-main">
+          「AIをどう業務に活かせばいいか分からない」を、<br>
+          <em>実装レベルまで落とし込みます。</em>
+        </p>
+        <p class="lead-sub">
+          プロンプト設計・ワークフロー設計・カスタムツール開発までを一貫対応。<br>
+          「導入したけど使われていない」を、現場が回る形に変えるのが得意です。
+        </p>
+      </div>
+
+      <div class="service-grid">
+
+        <div class="service-card service-card--feature">
+          <span class="label">AI Implementation</span>
+          <h3>AI活用支援・業務実装</h3>
+          <p>「AIを業務に組み込みたい」を伴走支援。プロンプト設計から API連携・カスタムツール開発まで対応します。</p>
+        </div>
+
+        <div class="service-card">
+          <span class="label">Data</span>
+          <h3>事業分析ダッシュボード構築</h3>
+          <p>売上・経費・案件データを統合。「今の粗利は？」がひと目でわかる画面を作ります。</p>
+        </div>
+
+        <div class="service-card">
+          <span class="label">Automation</span>
+          <h3>業務の自動化・仕組み化</h3>
+          <p>毎日の手作業をシステムに変えます。GAS・GitHub Actions・Pythonを使って対応。</p>
+        </div>
+
+        <div class="service-card">
+          <span class="label">Web Analytics</span>
+          <h3>Web分析・改善提案</h3>
+          <p>GA4・GTM・Clarityを使ったアクセス解析。「次に何をすべきか」まで提案します。</p>
+        </div>
+
+        <div class="service-card">
+          <span class="label">Direction</span>
+          <h3>Web・LP制作ディレクション</h3>
+          <p>要件整理から納品まで一貫対応。月5〜20件の進行管理実績があります。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 実績プロダクト -->
+  <section class="reveal cloud-zone sec-paper">
+
+    <!-- 背景：和雲がゆっくり立ち昇る -->
+      <div class="cloud-bg" aria-hidden="true">
+        <svg class="cloud cloud--shu" viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28,88 C10,88 6,68 22,60 C18,42 38,32 52,42 C56,22 84,18 96,34 C108,18 138,22 142,42 C160,32 182,46 176,62 C194,68 188,90 170,88 Z"
+                fill="#b94a4a"/>
+        </svg>
+        <svg class="cloud cloud--kon" viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30,90 C8,88 8,66 26,60 C20,40 44,28 60,40 C66,22 92,20 102,38 C116,22 144,28 146,46 C166,42 184,58 174,76 C188,84 178,96 158,92 Z"
+                fill="#1f2540"/>
+        </svg>
+        <svg class="cloud cloud--yamabuki" viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26,86 C10,84 8,64 24,58 C22,40 42,30 56,42 C62,24 86,22 98,36 C112,24 136,30 140,46 C156,42 178,54 172,70 C190,76 184,92 166,90 Z"
+                fill="#c9a14a"/>
+        </svg>
+        <svg class="cloud cloud--midori" viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32,90 C12,90 6,70 22,62 C16,42 40,30 56,42 C60,22 86,18 98,34 C112,18 138,22 144,42 C162,34 184,46 178,64 C196,72 188,92 168,90 Z"
+                fill="#3a6b5c"/>
+        </svg>
+        <svg class="cloud cloud--sakura" viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28,86 C10,84 8,66 24,58 C20,40 44,30 58,42 C62,24 88,22 100,36 C114,22 138,28 142,46 C158,42 178,54 172,70 C188,78 180,92 162,90 Z"
+                fill="#e8a5a5"/>
+        </svg>
+        <svg class="cloud cloud--kon2" viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30,88 C12,86 8,68 24,60 C18,42 42,30 58,42 C62,22 88,20 100,36 C114,22 142,26 146,46 C162,40 184,54 176,72 C194,78 184,94 164,90 Z"
+                fill="#2d3656"/>
+        </svg>
+    </div>
+
+    <div class="container">
+      <span class="section-label">Products</span>
+      <h2>実績プロダクト（自社開発）</h2>
+      <p style="margin-bottom:20px;">「困ったな」と思ったら、自分で作って解決してきました。</p>
+
+      <div class="product-list">
+
+        <details class="product-item">
+          <summary>① 未入金督促自動化bot</summary>
+          <div class="product-body">
+            <div class="product-row"><span class="key">課題</span><span class="val">督促漏れ＋返信がない相手へ行動する心理的ストレス</span></div>
+            <div class="product-row"><span class="key">技術</span><span class="val">GAS × Chatwork API</span></div>
+            <div class="product-row result"><span class="key">成果</span><span class="val">半年未回収だった請求が、bot通知当日に即日入金</span></div>
+          </div>
+        </details>
+
+        <details class="product-item">
+          <summary>② 事業分析ダッシュボード</summary>
+          <div class="product-body">
+            <div class="product-row"><span class="key">課題</span><span class="val">売上・経費・案件データが散在し、粗利がリアルタイムで見えない</span></div>
+            <div class="product-row"><span class="key">技術</span><span class="val">GASで複数SaaSを統合・集計</span></div>
+            <div class="product-row result"><span class="key">成果</span><span class="val">流入別・区分別の粗利をリアルタイム可視化。施策判断の根拠に</span></div>
+          </div>
+        </details>
+
+        <details class="product-item">
+          <summary>③ サイト自動巡回チェック</summary>
+          <div class="product-body">
+            <div class="product-row"><span class="key">課題</span><span class="val">表示崩れ・リンク切れの手動チェック工数とセキュリティリスク</span></div>
+            <div class="product-row"><span class="key">技術</span><span class="val">定期実行スクリプト＋GitHub Actions</span></div>
+            <div class="product-row result"><span class="key">成果</span><span class="val">監視の無人化。チェック人件費削減、異常検知スピード向上</span></div>
+          </div>
+        </details>
+
+        <details class="product-item">
+          <summary>④ 画像生成・編集ツール</summary>
+          <div class="product-body">
+            <div class="product-row"><span class="key">課題</span><span class="val">既存ツールのウォーターマークでSNSや提案資料に使えない</span></div>
+            <div class="product-row"><span class="key">技術</span><span class="val">Gemini 2.5 API自作インターフェース</span></div>
+            <div class="product-row result"><span class="key">成果</span><span class="val">制作コストを抑えながら唯一無二の素材を生成。リードタイム短縮</span></div>
+          </div>
+        </details>
+
+        <details class="product-item">
+          <summary>⑤ 画像生成プラットフォーム（社内SaaS）</summary>
+          <div class="product-body">
+            <div class="product-row"><span class="key">課題</span><span class="val">インストールの手間＋プロンプト習熟度によるアウトプットのばらつき</span></div>
+            <div class="product-row"><span class="key">技術</span><span class="val">Google Cloud Run上でAPI運用</span></div>
+            <div class="product-row result"><span class="key">成果</span><span class="val">データ流出リスクゼロで組織内オンデマンド生成を実現</span></div>
+          </div>
+        </details>
+
+        <details class="product-item">
+          <summary>⑥ ONAYAMI v3（課題構造化ツール）</summary>
+          <div class="product-body">
+            <div class="product-row"><span class="key">課題</span><span class="val">複雑な業務課題の整理が追いつかない。施策の根拠が感覚頼み</span></div>
+            <div class="product-row"><span class="key">技術</span><span class="val">課題可視化・構造化ロジック実装</span></div>
+            <div class="product-row result"><span class="key">成果</span><span class="val">問題発見から解決策への落とし込みを高速化</span></div>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 実績数字 -->
+  <section class="reveal sec-warm">
+    <div class="container">
+      <span class="section-label">Track Record</span>
+      <h2>実績</h2>
+      <div class="stats">
+        <div class="stat-box">
+          <div class="num">90%</div>
+          <div class="desc">手作業を自動化で削減<br>（3時間／日→ほぼゼロ）</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">50<span style="font-size:0.7em;">件+</span></div>
+          <div class="desc">制作案件を<br>遅延・トラブルゼロで完遂</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">10<span style="font-size:0.7em;">件+</span></div>
+          <div class="desc">WordPress<br>復旧対応</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">9<span style="font-size:0.7em;">年</span></div>
+          <div class="desc">イラスト継続契約<br>（年間13本納品）</div>
+        </div>
+      </div>
+
+      <h3 style="color:var(--kon); margin-top:8px;">経歴</h3>
+      <table class="career-table">
+        <tr><td>2000–2009</td><td>SE・社内研修講師（VB / ASP.NET / SQL）</td></tr>
+        <tr><td>2009–現在</td><td>イラストレーター（個人事業主）</td></tr>
+        <tr><td>2016–2019</td><td>一般事務・Excel VBA業務効率化</td></tr>
+        <tr><td>2019–現在</td><td>Webディレクター・業務改善担当</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 対応業種・ツール -->
+  <section class="reveal sec-paper">
+    <div class="container">
+      <span class="section-label">Expertise</span>
+      <h2>対応業種・使えるツール</h2>
+
+      <h3 class="block-heading">対応業種</h3>
+      <div class="industry-grid">
+        <div class="industry-item">
+          <span class="industry-num">01</span>
+          <div>
+            <div class="industry-jp">レジャー</div>
+            <div class="industry-en">Leisure</div>
+          </div>
+        </div>
+        <div class="industry-item">
+          <span class="industry-num">02</span>
+          <div>
+            <div class="industry-jp">クリニック</div>
+            <div class="industry-en">Clinic</div>
+          </div>
+        </div>
+        <div class="industry-item">
+          <span class="industry-num">03</span>
+          <div>
+            <div class="industry-jp">製造業</div>
+            <div class="industry-en">Manufacturing</div>
+          </div>
+        </div>
+        <div class="industry-item">
+          <span class="industry-num">04</span>
+          <div>
+            <div class="industry-jp">サービス業</div>
+            <div class="industry-en">Service</div>
+          </div>
+        </div>
+        <div class="industry-item">
+          <span class="industry-num">05</span>
+          <div>
+            <div class="industry-jp">VC</div>
+            <div class="industry-en">Venture Capital</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="block-heading" style="margin-top:36px;">使えるツール</h3>
+      <div class="tool-stack">
+
+        <div class="tool-group">
+          <div class="tool-cat">AI Stack</div>
+          <div class="tool-tags">
+            <span class="tag tag--ai">Claude</span>
+            <span class="tag tag--ai">ChatGPT</span>
+            <span class="tag tag--ai">Gemini</span>
+            <span class="tag tag--ai">Cursor</span>
+          </div>
+        </div>
+
+        <div class="tool-group">
+          <div class="tool-cat">API &amp; Integration</div>
+          <div class="tool-tags">
+            <span class="tag">Gemini API</span>
+            <span class="tag">Serper API</span>
+            <span class="tag">board API</span>
+            <span class="tag">Google Sheets API</span>
+            <span class="tag">LINE Messaging API</span>
+            <span class="tag">GA4 / Search Console API</span>
+            <span class="tag">Chatwork API</span>
+          </div>
+        </div>
+
+        <div class="tool-group">
+          <div class="tool-cat">Data &amp; Analytics</div>
+          <div class="tool-tags">
+            <span class="tag">GA4</span>
+            <span class="tag">Google Tag Manager</span>
+            <span class="tag">Microsoft Clarity</span>
+            <span class="tag">Looker Studio</span>
+            <span class="tag">Search Console</span>
+          </div>
+        </div>
+
+        <div class="tool-group">
+          <div class="tool-cat">Automation &amp; Dev</div>
+          <div class="tool-tags">
+            <span class="tag">Google Apps Script</span>
+            <span class="tag">Python</span>
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">Excel VBA</span>
+            <span class="tag">SQL</span>
+          </div>
+        </div>
+
+        <div class="tool-group">
+          <div class="tool-cat">Infra &amp; CMS</div>
+          <div class="tool-tags">
+            <span class="tag">Google Cloud Run</span>
+            <span class="tag">WordPress</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 対応について -->
+  <section class="reveal sec-warm">
+    <div class="container">
+      <span class="section-label">About Service</span>
+      <h2>料金・対応について</h2>
+      <div class="info-list">
+        <div class="info-row">
+          <span class="key">対応エリア</span>
+          <span class="val">オンラインで全国対応（北九州市拠点）</span>
+        </div>
+        <div class="info-row">
+          <span class="key">稼働形態</span>
+          <span class="val">業務委託・スポット・継続サポート</span>
+        </div>
+        <div class="info-row">
+          <span class="key">まずは相談</span>
+          <span class="val">「話だけ聞いてみたい」大歓迎です。費用は発生しません。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-inner">
+      <span class="section-label">Contact</span>
+      <h2>お問い合わせ</h2>
+      <p>「こんなこと頼めるかな？」という段階でも大丈夫です。<br>まずは30分、気軽にお話しましょう。</p>
+      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfJssspdfyTt5AJzz-GFNdoEnXZCz1oT8xltuYAh2iard1OQQ/viewform" target="_blank" rel="noopener">無料相談はこちら</a>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Office yuco. ／ Yukiko Ishibashi
+  </footer>
+
+  <script>
+    // スクロール連動フェードイン
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
