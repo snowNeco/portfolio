@@ -808,6 +808,89 @@
       letter-spacing: 0.15em;
     }
 
+    /* ===== 人物紹介カード ===== */
+    .char-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .char-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 20px 20px;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .char-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(31,37,64,0.07);
+    }
+    .char-icon {
+      flex-shrink: 0;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--kon) 0%, var(--kon-soft) 100%);
+      color: var(--yamabuki-l);
+      font-family: 'Noto Serif JP', serif;
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0;
+    }
+    .char-title {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--kon);
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+    .char-desc {
+      font-size: 13px;
+      color: var(--sumi-mid);
+      line-height: 1.8;
+      margin: 0;
+    }
+    @media (min-width: 600px) {
+      .char-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+    }
+    @media (min-width: 900px) {
+      .char-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ===== Origin note ===== */
+    .origin-note {
+      margin-top: 32px;
+      padding: 22px 26px;
+      border-left: 3px solid var(--yamabuki);
+      background: var(--gofun-2);
+      border-radius: 0 6px 6px 0;
+    }
+    .origin-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 12px;
+      color: var(--yamabuki);
+      letter-spacing: 0.25em;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .origin-note p {
+      font-size: 14px;
+      color: var(--sumi);
+      line-height: 1.95;
+      margin: 0;
+    }
+
     /* ===== タブレット ===== */
     @media (min-width: 600px) {
       body { font-size: 16px; }
@@ -955,6 +1038,7 @@
         <li>ツールを入れたはいいけど、誰も使いこなせていない</li>
         <li>業務が属人化していて、引き継ぎができない</li>
         <li>データはあるのに、経営判断に使えていない</li>
+        <li>AIで業務を内製化したいが、どこから手をつければいいかわからない</li>
       </ul>
     </div>
   </section>
@@ -1140,6 +1224,59 @@
         <tr><td>2016–2019</td><td>一般事務・Excel VBA業務効率化</td></tr>
         <tr><td>2019–現在</td><td>Webディレクター・業務改善担当</td></tr>
       </table>
+    </div>
+  </section>
+
+  <!-- 人物紹介 -->
+  <section class="reveal sec-paper">
+    <div class="container">
+      <span class="section-label">About me</span>
+      <h2>私の紹介</h2>
+
+      <div class="lead-strength">
+        <span class="lead-mark">/ First Impression vs Reality /</span>
+        <p class="lead-main">
+          「石橋という名前から、<em>融通の利かないおっさんかと思ってた</em>」
+        </p>
+        <p class="lead-sub">
+          初めてのメールでそう思われることがあるらしいです。でも実際に話してみると——「次も絶対相談したい」と言ってくださる方が多い。かめばかむほど味が出るタイプ、と言われます。
+        </p>
+      </div>
+
+      <div class="char-grid">
+
+        <div class="char-card">
+          <div class="char-icon">支</div>
+          <div class="char-body">
+            <div class="char-title">INFJ（提唱者）——日本人の約1〜2%</div>
+            <p class="char-desc">理想を持ちながら現実を動かせる稀なタイプ。共感力が高く、相手の感情や状況を自然に読み取る。内向型なので初対面では距離を感じさせることもあるが、打ち解けると誰より深く関わろうとする。リーダーというより、縁の下で全体を支えながら気づけば周囲に声をかけて回る——そういう役回りになることが多い。</p>
+          </div>
+        </div>
+
+        <div class="char-card">
+          <div class="char-icon">縁</div>
+          <div class="char-body">
+            <div class="char-title">関係が長く続く</div>
+            <p class="char-desc">退職して15年経つ職場の元同僚から、いまだに年1回の飲み会に誘ってもらっています。お客さんと食事に行くことも珍しくない。</p>
+          </div>
+        </div>
+
+        <div class="char-card">
+          <div class="char-icon">美</div>
+          <div class="char-body">
+            <div class="char-title">アートが好き</div>
+            <p class="char-desc">現在もイラストレーターとして活動中。「見た目の質」に対する目は、技術職の仕事にもそのまま出ます。</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="origin-note">
+        <span class="origin-mark">/ Origin /</span>
+        <p>大学生のころ、HTMLとCSSで自分を表現できるインターネットという世界に衝撃を受けました。育児でブランクがあった時期もあったけれど、気づいたらまたWebの世界に戻ってきていた。うまく説明できないけれど、そういうことなんだと思います。</p>
+        <p style="margin-top:10px; margin-bottom:0;">自分自身を発信したり売り込んだりするのは得意ではないので、SNSで検索してもほとんど出てきません。でもそのぶん、話してみると伝わることがある——そう思っています。</p>
+      </div>
+
     </div>
   </section>
 
