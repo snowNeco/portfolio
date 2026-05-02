@@ -900,6 +900,11 @@
       margin: 0;
     }
 
+    @media (max-width: 599px) {
+      .name-sep { display: none; }
+      .name-jp  { display: block; font-size: 15px; }
+    }
+
     /* ===== タブレット ===== */
     @media (min-width: 600px) {
       body { font-size: 16px; }
@@ -1029,7 +1034,7 @@
   <div class="profile-bar">
     <img class="icon" src="img/face-icon.png" alt="石橋夕紀子">
     <div>
-      <div class="name">Office yuco. ／ 石橋夕紀子</div>
+      <div class="name">Office yuco.<span class="name-sep"> ／ </span><span class="name-jp">石橋夕紀子</span></div>
       <div class="sub">北九州拠点 ／ オンラインで全国対応</div>
       <div class="tagline">SE歴10年・Webディレクション6年<br>「現場の困った」を技術で解決します</div>
     </div>
